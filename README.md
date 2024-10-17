@@ -99,7 +99,7 @@ system.out.println(3);
 
 # Main Java programming concept
 
-## Java variables types
+## Java primitive variables types
 There are a lot more, below is just the basics
 Float, long, double must be ended with f, l, and d
 - It seems only float number needs to be ended with f, with higher version of Java
