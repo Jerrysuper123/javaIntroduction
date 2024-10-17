@@ -257,3 +257,58 @@ public class Main {
     }
 }
 ```
+# OOP - Object oriented programming
+Put data and methods in a class for easy manipulation
+
+## Attribute - data within a class
+When creating a new instance => <typeClassName> instance = new className()
+
+```
+public class Main {
+    int x = 5;
+
+    //main method
+    public static void main(String[] args) {
+        //create an instance within the class itself
+        Main instanceMain = new Main();
+        System.out.println(instanceMain.x); //output 5
+    }
+}
+
+```
+
+You can override the existing attribute of the class
+```
+public class Main {
+    int x = 5;
+
+    //main method
+    public static void main(String[] args) {
+        Main instanceMain = new Main();
+        instanceMain.x = 10;
+        System.out.println(instanceMain.x); //output 10
+    }
+}
+```
+
+## static method can be called without creating an instance, public method must be called by creating an instance, public generally means can be accessed from the outside
+```
+public class Main {
+    static void myStaticMethod(){
+        System.out.println("Static method can be called without creating an object");
+    }
+
+    public void myPublicMethod(){
+        System.out.println("public method must be called with an object");
+    }
+
+    //main method
+    public static void main(String[] args) {
+        myStaticMethod(); //staic  method can be called right away
+//        myPublicMethod() => there is an error
+
+        Main mainObject = new Main();
+        mainObject.myPublicMethod(); //this can be called with an object
+    }
+}
+```
