@@ -101,6 +101,7 @@ system.out.println(3);
 
 ## Java variables types
 There are a lot more, below is just the basics
+Float, long, double must be ended with f, l, and d
 ```
         String text = "store text, and usually surround by double qoutes";
         //      store integer without decimal
