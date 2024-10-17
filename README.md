@@ -23,3 +23,40 @@ public class MOTService{
   }
 }
 ```
+
+## Java is close to C++ and C#, making it easier to switch to Java or vice versa
+Class is just a group of related methods and variable/object
+- Class Naming is pascal case
+- Method naming is camel case
+
+General structure
+```
+class Main {
+  public void main {
+    acccessModifier ReturnType methodName(parameterType parameter){
+    }
+  }
+}
+```
+
+## static
+Method that belongs to the class.
+You cannot get it from the instance of the class
+
+
+
+
+## Com.package is to group related classes
+If we have 100 to 1000 classes, it is better to group and organize in package/categories.
+So Com.package is a folder under the root folder.
+
+### Java folder structure
+`Com.package.Main`
+
+- Com is a folder
+- Package is a subfolder
+- Main is the class
+
+So that  you could type Java in Main class for execution.
+
+## How Java is excecuted?
