@@ -102,6 +102,7 @@ system.out.println(3);
 ## Java variables types
 There are a lot more, below is just the basics
 Float, long, double must be ended with f, l, and d
+- It seems only float number needs to be ended with f, with higher version of Java
 ```
         //1 byte 2^8=> 256 combination signed number between -128 and 127
         byte number = 125;
@@ -113,7 +114,7 @@ Float, long, double must be ended with f, l, and d
         int numberInt = 34;
 
         //8 bytes
-        long numbgerlong = 1234l;
+        long numbgerlong = 1234;
 
         //4 byte store fractional number, 6-7 decimal place
         float numberfloat = 0.3f;
