@@ -103,15 +103,29 @@ system.out.println(3);
 There are a lot more, below is just the basics
 Float, long, double must be ended with f, l, and d
 ```
-        String text = "store text, and usually surround by double qoutes";
-        //      store integer without decimal
-        int number = 123;
-        //store decimal, but ends with f
-        float floatingNumber = 123.23f;
-//        store single character, surrounded by single quote
-        char alphabet = 'A';
-        //Store boolean
+        //1 byte 2^8=> 256 combination signed number between -128 and 127
+        byte number = 125;
+
+        //2 bytes 2^16
+        short numberShort = -23;
+
+        //4 bytes
+        int numberInt = 34;
+
+        //8 bytes
+        long numbgerlong = 1234l;
+
+        //4 byte store fractional number, 6-7 decimal place
+        float numberfloat = 0.3f;
+
+        //8 byte, store 15 decimal digits
+        double numberDouble = 0.4;
+
+        //1 bit
         boolean married = true;
+
+        //2 byte usually for ascii charadter
+        char alphabet = 'B';
 ```
 
 ## final variable, similar to const in JS, where you cannot update the value once assigned
