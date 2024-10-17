@@ -98,3 +98,24 @@ system.out.println(3);
 ```
 
 # Main Java programming concept
+
+## Java variables types
+There are a lot more, below is just the basics
+```
+        String text = "store text, and usually surround by double qoutes";
+        //      store integer without decimal
+        int number = 123;
+        //store decimal, but ends with f
+        float floatingNumber = 123.23f;
+//        store single character, surrounded by single quote
+        char alphabet = 'A';
+        //Store boolean
+        boolean married = true;
+```
+
+## final variable, similar to const in JS, where you cannot update the value once assigned
+```
+final int text = 32;
+//cannot assign a new value to final var
+text = 22;
+```
