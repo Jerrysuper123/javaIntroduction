@@ -57,7 +57,7 @@ So Com.package is a folder under the root folder.
 - Package is a subfolder
 - Main is the class
 
-(folder)[./folder.jpg]
+!(folder)[./folder.jpg]
 
 So that  you could type Java in Main class for execution.
 
