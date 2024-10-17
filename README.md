@@ -75,3 +75,26 @@ You can do this compilation in terminal as well:
 In intellij, it also has the same folder structure:
 - SRC code folder
 - Out code folder - for byte code class file
+
+## Types of Java edition
+Standard edition (SE)
+- Enterprize edition is built on top of the SE and made to build scaleable enterpize software
+  
+Micro edition
+- Used to build for mobile device
+
+Card edition 
+- Used to build for card device
+
+## Convention: every Java program must have the same name as java class
+Main.java to class Main
+- Every program also must have a main method, might be named differently
+  - This main class will wrap every other class under it 
+- Because it is execute first
+
+## U can println(num) directly without quotation mark
+```
+system.out.println(3);
+```
+
+# Main Java programming concept
