@@ -51,12 +51,13 @@ If we have 100 to 1000 classes, it is better to group and organize in package/ca
 So Com.package is a folder under the root folder.
 
 ### Java folder structure
-`Com.package.Main`
+`Com.package2.Main`
 
 - Com is a folder
-- Package is a subfolder
+- Package2 is a subfolder
 - Main is the class
 
+Although intellij at SRC level collapse the 2 folder into 1 "com.package2"; this is actually nested folder; you can see the out folder layout, which is the byte class code
 ![folder](./folder.jpg)
 
 So that  you could type Java in Main class for execution.
