@@ -64,3 +64,14 @@ Although intellij at SRC level collapse the 2 folder into 1 "com.package2"; this
 So that  you could type Java in Main class for execution.
 
 ## How Java is excecuted?
+Source code.jva => compiler => byte code.class
+
+You can do this compilation in terminal as well:
+- Java byte code is platform independant
+- Java byte code => JVM java virtual machine => Linux, windows etc.
+  - C++ and python has the same way of working
+  - that is why it is platform independant
+ 
+In intellij, it also has the same folder structure:
+- SRC code folder
+- Out code folder - for byte code class file
