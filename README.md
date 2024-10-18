@@ -637,3 +637,24 @@ public class Main {
     }
 }
 ```
+## enum is a group of final constants, special class, structured group and type safe
+```
+public enum Level {
+    LOW,
+    MEDIUM,
+    HIGH
+}
+
+//This line tells me which package i am at now for this class
+package mycompany.learningpackage;
+
+public class Main {
+    //main method
+    public static void main(String[] args) {
+        //I can use enum without importing them??
+        Level myVar = Level.MEDIUM;
+        System.out.println(myVar);
+    }
+}
+
+```
