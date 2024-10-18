@@ -312,3 +312,84 @@ public class Main {
     }
 }
 ```
+
+## constructor is used to construct the new instance of the class, can be used to set initial values of the obj; construct method name is the same name as the class name
+```
+public class Main {
+    int modelYear;
+    String modelname;
+
+    //Contructor has the same method name as the Main class
+    public Main(int year, String name){
+        modelname = name;
+        modelYear= year;
+    }
+
+    //main method
+    public static void main(String[] args) {
+        //Create a new instance of the class, this will call Main constructor
+       Main newCar = new Main(1937, "BMW");
+        System.out.println(newCar.modelname + " " + newCar.modelYear);
+    }
+}
+```
+
+## Main method - public static void main(String[] args){}
+public static void main(String[] args)
+- why public (JVM access from outside), JVM needs to find the Main method to invoke it
+- then static (allow no object creation to access main funct), otherwise JVM cannot access it, unless creating an object
+- String[] args  (allow command line java hello arg 1 arg2), this allows use to add some arguments from the commandline
+
+
+Make a java file
+```
+// HelloWorld.java
+public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+           if (args.length > 0) {
+            System.out.println("there is args");
+        } else {
+            System.out.println("there is no args");
+        }
+
+    }
+}
+```
+
+
+Run in the terminal
+```
+user@host % java HelloWorld 
+Hello, World!
+user@host % vim HelloWorld.java
+user@host % javac HelloWorld.java 
+user@host % java HelloWorld 
+Hello, World!
+there is no args
+user@host% java HelloWorld "hehe"
+Hello, World!
+there is args
+```
+
+## How to compile and run from the terminal
+create a java file with .java extension. for example, HelloWorld.java
+```
+// HelloWorld.java
+public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+    }
+}
+
+```
+
+Compile java program
+```
+javac HelloWorld.java
+```
+
+This will generate a HelloWorld.class file. Take note we run the program without .class extension
+```
+java HelloWorld
+```
