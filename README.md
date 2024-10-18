@@ -393,3 +393,97 @@ This will generate a HelloWorld.class file. Take note we run the program without
 ```
 java HelloWorld
 ```
+
+## Accesss modifier and non access modifier
+
+Acess modifier - control the access to classes, methods or variable
+- public - accessed by any classes
+- private - only accessed within its own class
+- Protected - accessed within its own class, subclasses, and other classes within the package
+- default (no need to write this), accessed within its own class, subclasses and other classes within the same package
+
+I am a person:
+- my age is public information
+- my fetish is private to me only, and my son does not know it
+- my wealth is protected
+  - private to other people
+  - but my son (subclass) knows about it
+ 
+  No access modifier - provide additional info about the class, and methods
+  - static - element belong to the class rather than instance
+  - final - similar to JS const
+  - Abstract - the element is incomplete and must be overriden by subclasses, method body is not completed
+ 
+  There are a lot more other modifier...
+
+## Abstract class - provide template for its subclass, but does not provide method body
+
+```
+//Abstract define a template
+abstract class Student {
+    public String name = "john";
+    public int age = 32;
+    public abstract void study(); //no method body
+}
+
+//Subclass can inherit the attribute and method name, fill in method body
+public class John extends Student{
+    public int graduationyear = 2023;
+    public void study(){
+        System.out.println("studying now");
+    }
+}
+
+public class Main {
+    //main method
+    public static void main(String[] args) {
+        John john = new John();
+        System.out.println(john.name); //John
+        System.out.println(john.age); //32
+        System.out.println(john.graduationyear);
+        john.study(); //studying now
+    }
+}
+```
+
+## Private - encapsulation - hide sensitive data from user, only getter and setter can access it
+```
+public class Person {
+    public String name;
+    private int bankAccount;
+
+    public Person(String nameOnIC, int amount){
+        name = nameOnIC;
+        bankAccount = amount;
+    }
+    //getter
+    public int getBankAccount() {
+        return bankAccount;
+    }
+
+    //setter
+    public void setBankAccount(int bankAccount) {
+        this.bankAccount = bankAccount;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+}
+
+public class Main {
+    //main method
+    public static void main(String[] args) {
+        Person John = new Person("john", 234);
+        System.out.println(John.name);
+        System.out.println(John.getName());
+       // System.out.println(John.bankAccount); // error cannot access it directly
+        System.out.println(John.getBankAccount());
+    }
+}
+```
+  
