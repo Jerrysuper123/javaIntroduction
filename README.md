@@ -584,4 +584,56 @@ public class Main {
     }
 }
 ```
+## Java inner class - nested class in another class
+Below might not work in Java 17
+```
+class OuterClass {
+  int x = 10;
 
+  private class InnerClass {
+    int y = 5;
+  }
+}
+
+public class Main {
+  public static void main(String[] args) {
+    OuterClass myOuter = new OuterClass();
+    OuterClass.InnerClass myInner = myOuter.new InnerClass();
+    System.out.println(myInner.y + myOuter.x);
+  }
+}
+```
+
+## Interface (sound like ts interface, but not) is complete abstract class for methods but with no body. Has to use implement words to inherit properties. also, you can inherit multiple interface, while you can only inherit 1 class
+@Override annotation is used to indicate that a method is overriding a method from its superclass or implementing an interface method. It helps to ensure that a method is being correctly overridden, and it improves the clarity and maintainability of the code.
+
+```
+public interface FirstInterface {
+    public void myMethod();
+}
+
+public interface SecondInterface {
+    public void myOtherMethod();
+}
+
+public class DemoClass implements FirstInterface,SecondInterface{
+    @Override
+    public void myMethod() {
+        System.out.println("myMethod");
+    }
+
+    @Override
+    public void myOtherMethod() {
+        System.out.println("my other method");
+    }
+}
+
+public class Main {
+    //main method
+    public static void main(String[] args) {
+        DemoClass demoClass = new DemoClass();
+        demoClass.myMethod();
+        demoClass.myOtherMethod();
+    }
+}
+```
