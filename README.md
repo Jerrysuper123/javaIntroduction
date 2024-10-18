@@ -50,6 +50,8 @@ You cannot get it from the instance of the class
 If we have 100 to 1000 classes, it is better to group and organize in package/categories.
 So Com.package is a folder under the root folder.
 
+package is a folder in Java class to avoid naming conflict of class, a way to group related classes under the package umbrella
+
 ### Java folder structure
 `Com.package2.Main`
 
@@ -314,6 +316,8 @@ public class Main {
 ```
 
 ## constructor is used to construct the new instance of the class, can be used to set initial values of the obj; construct method name is the same name as the class name
+
+And constructor does not need returnType
 ```
 public class Main {
     int modelYear;
@@ -486,4 +490,98 @@ public class Main {
     }
 }
 ```
-  
+
+In banking, we can keep balance private, using getter and setter to control what value to update
+```
+public class BankAccount {
+    private double balance;
+
+    public BankAccount(double amount){
+        balance = amount;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    //setter modified
+    public void deposit(double amount) {
+        if(amount>0){
+        this.balance += amount;
+        }
+    }
+
+    public void withdraw(double amount){
+        //why i can access balance here directly
+        if(amount >0 && amount <=balance){
+            this.balance-=amount;
+        }
+    }
+}
+
+public class Main {
+    //main method
+    public static void main(String[] args) {
+        BankAccount bankAccount = new BankAccount(300);
+        System.out.println(bankAccount.getBalance());
+        //System.out.println(bankAccount.balance); error to access private balance directly
+        bankAccount.deposit(30);
+        bankAccount.withdraw(20);
+        System.out.println(bankAccount.getBalance()); //310
+    }
+}
+```
+## Checked vs unchecked exceptions
+Checked exceptions must be handled at compile time (either by catching or declaring them), whereas unchecked exceptions can be ignored by the compiler and handled (or not) at runtime.
+
+## inheritance - inherit methods and attributes from another class
+
+subclass/child class - the class that inherit
+
+super/parent class - the class being inherited from
+
+### you can use final if you do not want the other class to inherit it
+```
+final public class Vehicle {
+    int model = 1998;
+}
+
+public class Car extends Vehicle{
+    //cannot inherit from final class
+}
+
+```
+
+## polymorphism - subclasses are related by inheritance and perform differently (siblings have many formts) - same method but performs differently
+```
+public class Animal {
+    public void animalSound(){
+        System.out.println("this animal makes a sound");
+    }
+}
+
+public class Cat extends Animal {
+    public void animalSound(){
+        System.out.println("Cat meow meow");
+    }
+}
+
+public class Dog extends Animal {
+    public void animalSound(){
+        System.out.println("dog sound");
+    }
+}
+
+public class Main {
+    //main method
+    public static void main(String[] args) {
+        //Dog and Cat inherit from the same parent, but behave differently
+        Dog dog = new Dog();
+        dog.animalSound(); //dog sound
+
+        Cat cat = new Cat();
+        cat.animalSound(); //Cat meow meow
+    }
+}
+```
+
