@@ -727,6 +727,20 @@ public class Main {
         //sort
         Collections.sort(cars);
         System.out.println(cars); //[BMW, Mazda, Volvo]
+
+        //access the element
+        String firstElement = cars.get(0);
+        System.out.println(firstElement); //BMW
+
+        //set new element
+        cars.set(0, "Opel");
+        System.out.println(cars.get(0)); //OPel
+
+        cars.remove(0);
+        System.out.println(cars.get(0)); //Mazda
+
+        cars.clear();
+        System.out.println(cars);
     }
 }
 ```
