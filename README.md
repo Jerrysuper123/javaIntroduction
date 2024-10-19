@@ -744,3 +744,66 @@ public class Main {
     }
 }
 ```
+## Integer is a wrapper class for int with more utility function, when initializing arrayList, we must use Integer instead of int, because Collections only accept object instead of primitive
+```
+public class Main {
+    //main method
+    public static void main(String[] args) {
+        //Must use wrapper class for collections - Integer below instead of int
+        ArrayList<Integer> cars = new ArrayList<>();
+        
+    }
+}
+```
+int is a primitive data set, while Integer is a class that wraps an int value in an object.
+
+## Autoboxing - convert primitive to object, unboxing - convert object to primitive
+
+```
+public class Main {
+    //main method
+    public static void main(String[] args) {
+        int primitiveInt = 42;
+        Integer integerObject = new Integer(42);//explicit creating an object
+
+        Integer autoboxed = primitiveInt; //autobox - auto convert primitive to an Integer
+
+        int unboxed = integerObject; //unbox - integer to int
+
+        System.out.println(autoboxed); //42
+        System.out.println(unboxed);//42
+    }
+}
+```
+
+## Linkedlist - similar to lInkedlist data structure
+LinkedList has the same methods as arraylist because both implements the same List interface.
+```
+public class Main {
+    public static void main(String[] args) {
+        LinkedList<String> ls = new LinkedList<>();
+        ls.add("bmw");
+        ls.add("asta");
+
+        ls.addFirst("haha");
+
+        System.out.println(ls); //[haha, bmw, asta]
+    }
+}
+```
+
+## Hashmap - create key value pair object
+```
+
+public class Main {
+    public static void main(String[] args) {
+        HashMap<String, String> capitals = new HashMap<>();
+        capitals.put("China", "Beijing");
+        capitals.put("US", "Washington");
+
+        System.out.println(capitals); //{China=Beijing, US=Washington}
+
+        System.out.println(capitals.get("China")); //Beijing
+    }
+}
+```
