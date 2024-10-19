@@ -658,3 +658,75 @@ public class Main {
 }
 
 ```
+
+### scanner used to receiver user input
+```
+import java.util.Scanner;
+
+public class Main {
+    //main method
+    public static void main(String[] args) {
+        Scanner myObject = new Scanner(System.in);
+        System.out.println("Enter name, age and salary");
+        String name = myObject.nextLine();
+        int age = myObject.nextInt();
+        double salary = myObject.nextDouble();
+        System.out.println("Name" + name);
+        System.out.println("age:" + age);
+        System.out.println("salary" + salary);
+    }
+}
+```
+
+### How to format date
+```
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+public class Main {
+    //main method
+    public static void main(String[] args) {
+        //.now to get, not new class
+        LocalDateTime myDateObj = LocalDateTime.now();
+        System.out.println("Before formatting..." + myDateObj); //Before formatting...2024-10-19T10:54:25.019833
+
+        //you can format date using below
+        DateTimeFormatter myFormatter = DateTimeFormatter.ofPattern("dd-mm-yyy HH:mm:ss");
+
+        String formattedDate = myDateObj.format(myFormatter);
+        System.out.println("after formatted.." + formattedDate); //after formatted..19-56-2024 10:56:03
+    }
+}
+```
+
+### ArrayList is a resizable length of array
+```
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Main {
+    //main method
+    public static void main(String[] args) {
+        ArrayList<String> cars = new ArrayList<String>();
+        cars.add("Volvo");
+        cars.add("BMW");
+        cars.add("Mazda");
+
+        System.out.println(cars);//[Volvo, BMW, Mazda]
+
+        //loop by counter
+        for(int i=0; i<cars.size(); i++){
+            System.out.println(cars.get(i));
+        } //Volvo BMW Mazda
+
+        //quick loop
+        for (String car: cars){
+            System.out.println(car); //Volvo BMW Mazda
+        }
+
+        //sort
+        Collections.sort(cars);
+        System.out.println(cars); //[BMW, Mazda, Volvo]
+    }
+}
+```
