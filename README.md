@@ -807,3 +807,30 @@ public class Main {
     }
 }
 ```
+
+## super - calling constructor of parent class
+```
+public class Animal {
+    String animal;
+
+    public Animal(String animal){
+        this.animal = animal;
+    }
+    public void animalSound(){
+        System.out.println("this animal makes a sound");
+    }
+}
+
+public class Cat extends Animal {
+    //Cat constructor
+    public Cat(String animal) {
+        //calling constructor of the parent class Animal
+        super(animal);
+    };
+    public void animalSound(){
+        System.out.println("Cat meow meow");
+    }
+}
+```
+
+
