@@ -833,4 +833,14 @@ public class Cat extends Animal {
 }
 ```
 
+## Java exceptions 
+
+Here are a few examples of predefined exceptions:
+- ArithmeticException: Thrown when an arithmetic operation cannot be performed correctly, such as division by zero.
+- NullPointerException: Thrown when an attempt is made to access a member (method or field) on a null object reference.
+- ArrayIndexOutOfBoundsException: Thrown when attempting to access an array element at an invalid index.
+- IOException: Base class for exceptions related to input and output operations.
+- ClassNotFoundException: Thrown when a class is not found by the classloader.
+- NumberFormatException: Thrown when an invalid string representation is parsed to a number.
+
 
