@@ -891,7 +891,7 @@ Here are a few examples of predefined exceptions:
 - ClassNotFoundException: Thrown when a class is not found by the classloader.
 - NumberFormatException: Thrown when an invalid string representation is parsed to a number.
 
-## define customer exception, whenever you want to make use of it in a class - it must start with a throws word
+## define custom exception, whenever you want to make use of it in a class - it must start with a throws word
 
 ```
 public class InsufficientFundsException extends Exception {
