@@ -834,6 +834,20 @@ public class Cat extends Animal {
 ```
 
 ## Java exceptions 
+```
+public class Main {
+    public static void main(String[] args) {
+        try{
+        int[] numbers = {1,2,3};
+        System.out.println(numbers[10]); //java.lang.ArrayIndexOutOfBoundsException: Index 10 out of bounds for length 
+        } catch (Exception e){
+            System.out.println(e);
+        } finally {
+            System.out.println("try and catch is finished");
+        }
+    }
+}
+```
 
 Here are a few examples of predefined exceptions:
 - ArithmeticException: Thrown when an arithmetic operation cannot be performed correctly, such as division by zero.
