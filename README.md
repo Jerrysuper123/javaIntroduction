@@ -808,6 +808,40 @@ public class Main {
 }
 ```
 
+## Iterator loops though collections
+```
+// Import the ArrayList class and the Iterator class
+import java.util.ArrayList;
+import java.util.Iterator;
+
+
+public class Main {
+  public static void main(String[] args) {
+
+
+    // Make a collection
+    ArrayList<String> cars = new ArrayList<String>();
+    cars.add("Volvo");
+    cars.add("BMW");
+    cars.add("Ford");
+    cars.add("Mazda");
+
+
+    // Get the iterator
+    Iterator<String> it = cars.iterator();
+
+
+    // Print the first item
+    System.out.println(it.next());
+	while(it.hasNext()) {
+  System.out.println(it.next());
+}
+
+
+  }
+}
+```
+
 ## super - calling constructor of parent class
 ```
 public class Animal {
@@ -857,4 +891,41 @@ Here are a few examples of predefined exceptions:
 - ClassNotFoundException: Thrown when a class is not found by the classloader.
 - NumberFormatException: Thrown when an invalid string representation is parsed to a number.
 
+## define customer exception, whenever you want to make use of it in a class - it must start with a throws word
 
+```
+public class InsufficientFundsException extends Exception {
+    public InsufficientFundsException(String message){
+        //The super keyword refers to the parent class (in this case, Exception),
+        // and this ensures that the custom exception message is properly handled by the base exception class.
+        //One of the most common uses of super is to call the constructor of the parent class.
+        super(message);
+    }
+}
+```
+
+```
+public class BankAccount {
+    ...
+
+    public void withdraw(double amount) throws InsufficientFundsException{
+        //why i can access balance here directly
+        if(amount>balance){
+            throw new InsufficientFundsException("Insufficient bank balance");
+        }
+        if(amount >0 && amount <=balance){
+            this.balance-=amount;
+        }
+    }
+}
+
+```
+
+```
+public class Main {
+    public static void main(String[] args) throws InsufficientFundsException {
+        BankAccount ba = new BankAccount(30.3);
+        ba.withdraw(31); //Insufficient bank balance
+    }
+}
+```
