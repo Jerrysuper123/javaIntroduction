@@ -1002,3 +1002,135 @@ public class Main implements Runnable{
     }
 }
 ```
+
+## Concurrency problem
+- cannot predict which thread finishes first
+- when multiple threads are reading and updating the same variable
+- then the result of the same variable can be unpredictable
+- To avoid this problem, it is best to share a few attributes across threads
+- isAlive() method of the thread to check whether the thread has finished running before using any attributes that the thread can change
+
+```
+public class Main extends Thread{
+    public static int amount = 0;
+
+    public static void main(String[] args) {
+     Main thread = new Main();
+     thread.start();
+     //wait for the thread to finish
+     while (thread.isAlive()){
+         System.out.println("Waiting...");
+     }
+     //after finishing the first thread
+        //amount = 1
+     //second thread
+     System.out.println("Main: " + amount); //1
+     amount++;
+     System.out.println("Main: " + amount); //2
+    }
+
+
+    //override Thread class' run method
+    public void run(){
+        amount++;
+    }
+}
+```
+
+## Lamda - ts arrow function but different arrow ->
+```
+public class Main{
+    public static void main(String[] args) {
+        ArrayList<Integer> numbers = new ArrayList<>();
+        numbers.add(1);
+        numbers.add(2);
+        //lamda, similar to arrow function
+        // but differnt arrow ->
+        numbers.forEach((n)-> System.out.println(n));
+    }
+}
+```
+
+### use consumer interface to store a lamda expression to be used later
+```
+
+import java.util.function.Consumer;
+public class Main{
+    public static void main(String[] args) {
+        ArrayList<Integer> numbers = new ArrayList<>();
+        numbers.add(1);
+        numbers.add(2);
+        //lamda, similar to arrow function
+        // but differnt arrow ->
+        Consumer<Integer> method = (n)-> System.out.println(n);
+        numbers.forEach(method);
+    }
+}
+```
+### Make lamda as a parameter for a function
+- interface should have the same parameter type and 1 function only
+- Calling interface's method run will run the lamda expression
+```
+interface StringFunction {
+    //method without body to be overriden
+    String run(String str);
+}
+
+public class Main{
+    public static void main(String[] args) {
+       StringFunction exclaim = (s) -> s + "!";
+        StringFunction ask = (s) -> s + "?";
+        printFormatted("hello", exclaim);
+        printFormatted("hello", ask);
+    }
+
+    public static void printFormatted(String str, StringFunction format){
+        //format.run override run in the StringFunction interface
+        // run(String s) {return s + "?" }
+        String result = format.run(str);
+        System.out.println(result);
+    }
+}
+```
+
+## Java file handling - create file at current folder, u can create it in any specified location as well
+
+
+```
+public class Main{
+    public static void main(String[] args) {
+        try{
+            File myObj = new File("filename.txt");
+            //Have we created new file?
+            if(myObj.createNewFile()){
+                System.out.println("new file created: " + myObj.getName());
+            } else {
+                System.out.println("File already existed");
+            }
+        }catch (IOException e){
+            System.out.println("An error occcur");
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+### The printStackTrace() method in Java is a tool used to handle exceptions and errors. It is a method of Java’s throwable class which prints the throwable along with other details like the line number and class name where the exception occurred.
+
+printStackTrace() is very useful in diagnosing exceptions. For example, if one out of five methods in your code cause an exception, printStackTrace() will pinpoint the exact line in which the method raised the exception.
+
+```
+public class Main{
+    public static void foo(){
+        try {
+            int num1 = 5/0;
+        }catch(Throwable e){
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) {
+        foo();
+    }
+}
+```
