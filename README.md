@@ -929,3 +929,76 @@ public class Main {
     }
 }
 ```
+
+## throw allows you to make use of many predefined exceptions
+The throw statement is used together with an exception type. There are many exception types available in Java: ArithmeticException, FileNotFoundException, ArrayIndexOutOfBoundsException, SecurityException, etc:
+
+```
+public class Main {
+    static void checkAge(int age){
+        if(age<18){
+            //Exception in thread "main" java.lang.ArithmeticException: You have not reached 18 year
+            throw new ArithmeticException("You have not reached 18 year"); //
+        } else {
+            System.out.println("you have reached 18");
+        }
+    }
+
+    public static void main(String[] args) {
+        checkAge(17);
+    }
+}
+```
+## Java regex - at surface only
+```
+public class Main {
+    
+    public static void main(String[] args) {
+        //create a regex pattern
+        Pattern pattern = Pattern.compile("I am here", Pattern.CASE_INSENSITIVE);
+        //use the pattern to match a string
+        Matcher matcher = pattern.matcher("I am here and also there");
+        //match.find() will return whether found or not, very verbose
+        boolean matchFound = matcher.find();
+        if(matchFound){
+            System.out.println("found match"); //found match
+        } else {
+            System.out.println("match not found");
+        }
+    }
+}
+```
+## Java thread
+### extends to Thread class and override its run() method
+```
+public class Main extends Thread{
+
+    public static void main(String[] args) {
+        Main thread = new Main();
+        thread.start();
+        System.out.println("This code is outside of the thread");
+    }
+
+    //override Thread class' run method
+    public void run(){
+        System.out.println("This code is running in a thread");
+    }
+}
+```
+### implement Runnable class, then the new thread can be run by pass an instance of the class to Thread's obj constructor, then calling the thread's start() method
+```
+public class Main implements Runnable{
+
+    public static void main(String[] args) {
+       Main obj = new Main();
+       Thread thread = new Thread(obj);
+       thread.start();
+       System.out.println("Code running outside of the thread");
+    }
+
+    //override Thread class' run method
+    public void run(){
+        System.out.println("This code is running in a thread");
+    }
+}
+```
