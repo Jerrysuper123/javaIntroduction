@@ -1134,3 +1134,74 @@ public class Main{
     }
 }
 ```
+## How to read a file
+```
+public class Main{
+    public static void main(String[] args) {
+        try{
+            //assume already created in existance
+            File myObj = new File("filename.txt");
+            Scanner myReader = new Scanner(myObj);
+
+            while(myReader.hasNextLine()){
+                System.out.println(myReader.nextLine());
+            }
+            //must close reader
+            myReader.close();
+        }catch (FileNotFoundException e){
+            System.out.println("An error occcur");
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+## How to delete a file or folder
+```
+public class Main{
+    public static void main(String[] args) {
+            //assume already created in existance
+            File myObj = new File("filename.txt");
+            if(myObj.delete()){
+                System.out.println("Deleted the file: " + myObj.getName());
+            } else {
+                System.out.println("failed to delete the file");
+            }
+    }
+}
+
+import java.io.File; 
+
+public class DeleteFolder {
+  public static void main(String[] args) { 
+    File myObj = new File("C:\\Users\\MyName\\Test"); 
+    if (myObj.delete()) { 
+      System.out.println("Deleted the folder: " + myObj.getName());
+    } else {
+      System.out.println("Failed to delete the folder.");
+    } 
+  } 
+}
+
+```
+
+## Count no of words
+```
+public class Main{
+    public static void main(String[] args) {
+        String words = "One Two Three Four";
+        int countWords = words.split("\\s").length;
+        System.out.println(countWords);
+    }
+}
+```
+
+## instanceof - similar to ts
+```
+public class Main{
+    public static void main(String[] args) {
+        Main myObj = new Main();
+        System.out.println(myObj instanceof Main); //true
+    }
+}
+```
