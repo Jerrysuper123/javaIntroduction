@@ -219,6 +219,7 @@ class Hello{
 
 
 # mutable string - string buffer is thread safe, while string builder is not thread safe
+String buffer is thread safe, sync threads to allow only 1 method to access the string to prevent race condition.
 
 ```
 class Hello{
