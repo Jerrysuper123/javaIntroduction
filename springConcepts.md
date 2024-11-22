@@ -120,3 +120,31 @@ public class DemoJDBC {
 }
 
 ```
+
+# prepared statement, replace ? parameter with values
+```
+public class DemoJDBC {
+    public static void main(String[] args) throws Exception {
+       ...
+        String sql = "insert into student values (?,?,?)";
+
+        //user input
+        int sid = 102;
+        String sname = "Jamsine";
+        int marks = 45;
+
+        Class.forName("org.postgresql.Driver");
+        Connection con = DriverManager.getConnection(url,uname, pass);
+        //this cache and prepare the sql statement, for ? to be replaced with parameters
+        PreparedStatement ps = con.prepareStatement(sql);
+        //replace ? with user inputs
+        ps.setInt(1, sid);
+        ps.setString(2, sname);
+        ps.setInt(3, marks);
+        //preparestatement exe
+        ps.execute();
+        con.close();
+
+    }
+}
+```
