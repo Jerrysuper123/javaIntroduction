@@ -73,3 +73,50 @@ public class DemoJDBC {
 }
 
 ```
+
+# update db 
+```
+
+public class DemoJDBC {
+    public static void main(String[] args) throws Exception {
+        // jdbc:<db type>://localhost:<port no>/<db name>
+        String url = "jdbc:postgresql://localhost:5432/Demo";
+        String uname = "postgres";
+        String pass = "Je-112233";
+        String sql = "update student set sname='Max' where sid=6";
+        Class.forName("org.postgresql.Driver");
+        Connection con = DriverManager.getConnection(url,uname, pass);
+        System.out.println("connection established");
+        Statement st = con.createStatement();
+        st.execute(sql);
+        con.close();
+        System.out.println("Connection closed");
+
+
+    }
+}
+```
+
+# delete row
+```
+
+public class DemoJDBC {
+    public static void main(String[] args) throws Exception {
+        // jdbc:<db type>://localhost:<port no>/<db name>
+        String url = "jdbc:postgresql://localhost:5432/Demo";
+        String uname = "postgres";
+        String pass = "Je-112233";
+        String sql = "delete from student where sid=6";
+        Class.forName("org.postgresql.Driver");
+        Connection con = DriverManager.getConnection(url,uname, pass);
+        System.out.println("connection established");
+        Statement st = con.createStatement();
+        st.execute(sql);
+        con.close();
+        System.out.println("Connection closed");
+
+
+    }
+}
+
+```
