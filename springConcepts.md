@@ -188,3 +188,53 @@ public class DemoApplication {
 }
 
 ```
+
+# @Autowired - a way to tell IOC container that a subclass is also part of the beans
+```
+package com.example.demo;
+
+import org.springframework.stereotype.Component;
+
+//Subclass also must have component annotation
+@Component
+public class Laptop {
+    public void compile (){
+        System.out.println("compiling...");
+    };
+}
+
+package com.example.demo;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+//Annotation to tell IOC container to manage this component for us
+@Component
+public class Alien {
+
+    //we auto wire below subclass laptop as part of the beans
+    @Autowired
+    Laptop laptop;
+    public void code(){
+        laptop.compile();
+    }
+}
+
+package com.example.demo;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+
+@SpringBootApplication
+public class DemoApplication {
+
+	public static void main(String[] args) {
+		ApplicationContext context = SpringApplication.run(DemoApplication.class, args);
+		Alien obj = context.getBean(Alien.class);
+		obj.code();
+
+	}
+
+}
+
+```
