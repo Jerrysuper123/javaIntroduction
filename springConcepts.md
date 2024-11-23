@@ -148,3 +148,43 @@ public class DemoJDBC {
     }
 }
 ```
+# Spring boot and Inversion of control and dependency injection
+```
+package com.example.demo;
+
+import org.springframework.stereotype.Component;
+//Annotation to tell IOC container to manage this component for us
+@Component
+public class Alien {
+
+    public void code(){
+        System.out.println("coding");
+    }
+}
+
+package com.example.demo;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+
+@SpringBootApplication
+public class DemoApplication {
+
+	public static void main(String[] args) {
+		//run app and return applicationContext which can access IOC (inversion of control) container - stupid name
+		//just say object control container, so hard for people to remember
+		//this app context is similar to React context
+		ApplicationContext context = SpringApplication.run(DemoApplication.class, args);
+		//bean is object, so get beans means creating obj from this class
+		Alien obj = context.getBean(Alien.class);
+		obj.code();
+		Alien obj2 = context.getBean(Alien.class);
+		obj2.code();
+
+
+	}
+
+}
+
+```
