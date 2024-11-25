@@ -67,6 +67,7 @@ view and edit table to insert data
 Execute the query
 ```
 insert into student values (1, 'Navin', 50);
+```
 
 # why we do not concat sql statement with var
 1. prevent sql injection
