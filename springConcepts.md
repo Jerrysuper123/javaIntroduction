@@ -474,3 +474,42 @@ in xml, you do not have to mention Id, it will still create.
     </bean>
 </beans>
 ```
+
+## setter injection
+```
+<bean id="alien" class="org.example.Alien">
+    <property name="age" value="23"></property>
+</bean>
+
+package org.example;
+
+public class Alien {
+    private int age;
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public Alien(){
+        System.out.println("Alien obj created");
+    }
+    public void code(){
+        System.out.println("coding");
+    };
+
+}
+
+public class App {
+    public static void main(String[] args) {
+        ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+        Alien obj = (Alien) context.getBean("alien");
+        obj.code();
+        System.out.println(obj.getAge()); //23
+
+    }
+}
+```
