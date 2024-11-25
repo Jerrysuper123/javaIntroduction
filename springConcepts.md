@@ -466,6 +466,14 @@ in xml, you do not have to mention Id, it will still create.
 ```
 
 ## scope
+Even if u getBean 2 times, 1 object will be created. 
+
+When u create the 2 objects from the same bean, both objects refer to the same object. meaning if u update the attribute of 1 object, the other one will be affected too.
+
+in spring, there are 2 types of scope
+1. singleton - by default, spring bean is singleton. getBean only create 1 object, even if u called it twice. But singleton will create obj auto when u load xml file.
+2. prototype - this will create a new object every time u use getBean. However, this will not create an obj automatically when you load xml file.
+   
 ```
 <bean id="alien" class="org.example.Alien" scope="prototype">
 </bean>
@@ -476,6 +484,10 @@ in xml, you do not have to mention Id, it will still create.
 ```
 
 ## setter injection
+how to dependency inject into setter, we can do it in xml file.
+
+u can use <property> in the bean. this will call the setter method to reset the value.
+
 ```
 <bean id="alien" class="org.example.Alien">
     <property name="age" value="23"></property>
