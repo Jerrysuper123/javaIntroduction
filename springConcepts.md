@@ -464,3 +464,13 @@ in xml, you do not have to mention Id, it will still create.
  //whenever this line is called, beans are created based on xml file
         ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
 ```
+
+## scope
+```
+<bean id="alien" class="org.example.Alien" scope="prototype">
+</bean>
+<!--    default scope is singelton-->
+    <bean id="laptop" class="org.example.Laptop" scope="singleton">
+    </bean>
+</beans>
+```
