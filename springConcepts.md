@@ -168,6 +168,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
+//annotation tells that this is a spring boot config to use annotation
 @SpringBootApplication
 public class DemoApplication {
 
