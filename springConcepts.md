@@ -383,3 +383,72 @@ public class DemoApplication {
 }
 
 ```
+
+
+# use XML to configure beans in a Maven quick start template
+Add spring dependencies
+```
+<!--    //add spring context to get ioc container-->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
+      <version>6.1.14</version>
+    </dependency>
+  </dependencies>
+```
+
+Configure bean at src/main/resources/spring.xml
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<bean id="alien" class="org.example.Alien">
+
+</bean>
+</beans>
+```
+
+Alien class
+```
+package org.example;
+
+public class Alien {
+    public void code(){
+        System.out.println("coding");
+    };
+
+}
+
+```
+
+App class
+```
+package org.example;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+/**
+ * Hello world!
+ */
+public class App {
+    public static void main(String[] args) {
+        //applicationContext is a superset of beanfactory interface
+        //classpathxml is one way of config context
+        //there are other ways as well
+        //1. xml
+        //2. java basedd
+        //3. annotation
+
+        ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+        Alien obj = (Alien) context.getBean("alien");
+        obj.code();
+
+        System.out.println("Hello World!");
+    }
+}
+
+```
