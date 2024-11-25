@@ -459,3 +459,8 @@ public class App {
  If you mention same class/bean 2 times in xml, spring will create 2 objects of the same class.
 
 in xml, you do not have to mention Id, it will still create.
+
+```
+ //whenever this line is called, beans are created based on xml file
+        ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+```
