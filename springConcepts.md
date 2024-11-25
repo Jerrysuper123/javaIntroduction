@@ -452,3 +452,10 @@ public class App {
 }
 
 ```
+
+ ## object creation
+ The moment u r creating an ApplicationContext, the class mentioned in the xml is created.
+
+ If you mention same class/bean 2 times in xml, spring will create 2 objects of the same class.
+
+in xml, you do not have to mention Id, it will still create.
