@@ -668,6 +668,18 @@ you can also autowire by type - look for type, not name
 - if u also do not specify the name of the bean, but type only
 - getBean(name of bean, type of class)
 
+```
+        Alien obj = (Alien) context.getBean("alien", Alien.class);
+        obj.code();
+        System.out.println(obj.getAge()); //23
+
+        //although we r creating interface of computer
+        //a laptop is created
+        Computer com = context.getBean(Computer.class);
+        com.compile();
+        Desktop desk = context.getBean(Desktop.class);
+```
+
 ## inner bean
 - focus on laptop only, Alien depending on laptop
 - laptop bean for entire app
