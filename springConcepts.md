@@ -525,3 +525,150 @@ public class App {
     }
 }
 ```
+
+## setter injection
+how to dependency inject into setter, we can do it in xml file.
+
+u can use <property> in the bean. this will call the setter method to reset the value.
+
+## ref attribute
+property only work for primitive value, what about obj or ref attribute
+
+in xml, we can use ref attribute for inject an object.
+```
+<bean id="alien" class="org.example.Alien">
+    <property name="age" value="23"></property>
+    <property name="laptop" ref="laptop1"></property>
+</bean>
+
+    <bean id="laptop1" class="org.example.Laptop" scope="singleton">
+    </bean>
+```
+
+## constructor injection
+how to inject into constructor parameter in xml. Use <constructor-arg value="21"> in xml.
+
+what if u have 2 constructor parameter?
+<constructor-arg value="21">
+<constructor-arg ref="laptop1">
+
+```
+<bean id="alien" class="org.example.Alien">
+<!-- value is a primitive type, ref is the object; the order of constructor is important -->
+    <constructor-arg value="44"/>
+    <constructor-arg ref="laptop1"/>
+<!--    <property name="laptop" ref="laptop1"/>-->
+</bean>
+<!--    default scope is singelton-->
+    <bean id="laptop1" class="org.example.Laptop" scope="singleton">
+    </bean>
+</beans>
+```
+
+we can also can type to the const args, so they constructor knows which value to pick up
+
+```
+<bean id="alien" class="org.example.Alien">
+    <constructor-arg type="org.example.Laptop" ref="laptop1"/>
+    <constructor-arg type="int" value="44"/>
+<!--    <property name="laptop" ref="laptop1"/>-->
+</bean>
+```
+
+what if we have 2 int parameters. it would be hard to know using above. We can specify index num for the parameters
+
+```
+<bean id="alien" class="org.example.Alien">
+    <constructor-arg index="0" ref="laptop1"/>
+    <constructor-arg index="1" value="44"/>
+</bean>
+```
+
+we can also use name as the parameter name
+```
+    <constructor-arg name="laptop" ref="laptop1"/>
+    <constructor-arg name="age" value="44"/>
+```
+
+Use constructor annotation to specify the name 
+```
+<bean id="alien" class="org.example.Alien">
+    <constructor-arg name="age" value="44"/>
+    <constructor-arg name="laptop" ref="laptop1"/>
+</bean>
+se
+//constructor of Alien class
+   @ConstructorProperties({"laptop","age"})
+    public Alien(Laptop laptop, int age) {
+        System.out.println("multi para constructor called");
+        this.laptop = laptop;
+        this.age = age;
+    }
+
+```
+
+## autowire by name - link auto wire by name
+```
+<!--    autowire by name - in alien class look for com name to match the bean below-->
+<bean id="alien" class="org.example.Alien" autowire="byName">
+
+</bean>
+    <bean id="com1" class="org.example.Laptop">
+    </bean>
+
+<!--    will look for com var to match the com id here-->
+    <bean id="com" class="org.example.Desktop">
+    </bean>
+</beans>
+
+//in Alien class setter
+    public void setCom(Computer com) {
+        this.com = com;
+    }
+
+```
+
+you can also autowire by type - look for type, not name
+```
+//it will match by type in the bean,
+<bean id="alien" class="org.example.Alien" autowire="byType">
+```
+
+## primary bean - there are 2 beans, making it primary, so that spring know which one is primary bean
+
+```
+<!--    autowire by name - in alien class look for com name to match the bean below-->
+<bean id="alien" class="org.example.Alien" autowire="byType">
+    <property name="age" value="44"/>
+
+</bean>
+<!--    set com1 as primary, both com1 and com are of the same computer type-->
+    <bean id="com1" class="org.example.Laptop" primary="true">
+    </bean>
+
+    <bean id="com" class="org.example.Desktop">
+    </bean>
+</beans>
+```
+
+## lazy init of bean
+- xml will always create obj no matter what, because of singleton scope
+- I do not want to load desktop obj by default by using `lazy-init="true"`
+- only when u getbean, the object will be created
+- a non lazy bean depending on the lazy bean, the lazy bean will still be created
+
+```
+    <bean id="com" class="org.example.Desktop" lazy-init="true">
+```
+
+## get bean by type
+- getBean only return obj, then we need to do typecasting
+- can we get the type of the class
+- we can fill in the second parameter of the getBean, to tell its type "Alien.class"
+- if u also do not specify the name of the bean, but type only
+- getBean(name of bean, type of class)
+
+## inner bean
+- focus on laptop only, Alien depending on laptop
+- laptop bean for entire app
+- we can make laptop bean only responsible for ALien bean only, making it an inner bean or nested bean
