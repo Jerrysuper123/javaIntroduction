@@ -684,3 +684,13 @@ you can also autowire by type - look for type, not name
 - focus on laptop only, Alien depending on laptop
 - laptop bean for entire app
 - we can make laptop bean only responsible for ALien bean only, making it an inner bean or nested bean
+
+```
+<bean id="alien" class="org.example.Alien" autowire="byType">
+    <property name="age" value="44"/>
+    <property name="com">
+        <bean id="com1" class="org.example.Laptop" primary="true">
+        </bean>
+    </property>
+</bean>
+```
