@@ -757,3 +757,168 @@ scope - singleton and prototype
 
 how to inject a value -> @value("21); when u use annotation, you are injecting from outside the code
 
+```
+//org.example/config/AppConfig
+package org.example.config;
+
+import org.example.Alien;
+import org.example.Desktop;
+import org.example.Computer;
+import org.example.Laptop;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.*;
+
+//tell spring this is a java-based config file to manage beans
+@Configuration
+//scan this component, and create bean when necessary, then we do not need to specify each bean one by one
+@ComponentScan("org.example")
+public class AppConfig {
+//    @Bean
+//    //autowire link Alien to Desktop
+//    //when u autowire to Computer interface, it will look for desktop bean
+//    //however, when u have 2 of the same Computer type, need to set primary Bean
+//    public Alien alien(@Autowired Computer com){ // @Qualifier("desktop")
+//        Alien obj = new Alien();
+//        obj.setAge(25);
+//        obj.setCom(com);
+//        return obj;
+//    };
+//
+//    //return a Desktop obj
+//    //must tell spring this is a bean
+//    //u can give multiple name in {} to the bean
+////    @Bean(name= {"com1", "com2"})
+//    @Bean
+//    @Primary
+//    //method name "desktop" is the default bean name
+//    //Scope prototype allows u to create multiple obj
+////    @Scope("prototype")
+//    public Desktop desktop(){
+//        return new Desktop();
+//    }
+//
+//    @Bean
+//    public Laptop laptop(){
+//        return new Laptop();
+//    }
+}
+
+package org.example;
+
+import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Component;
+
+
+//u can give a name to the bean
+@Component("desktop2")
+//@Primary
+public class Desktop implements Computer {
+    public Desktop() {
+        System.out.println("desktop obj created");
+    }
+
+    public void compile(){
+        System.out.println("compiling in desktop");
+    }
+}
+
+package org.example;
+
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+
+@Component
+//@Scope("prototype")
+public class Laptop implements Computer {
+    public Laptop(){
+        System.out.println("laptop obj created");
+    }
+    @Override
+    public void compile(){
+        System.out.println("compiling in laptop");
+    }
+}
+
+package org.example;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Component;
+
+import java.beans.ConstructorProperties;
+@Component
+public class Alien {
+    //auto find any Computer beans and inject here
+//    @Qualifier("desktop")
+    private Computer com;
+
+
+    private int age;
+
+//    @ConstructorProperties({"laptop","age"})
+//    public Alien(Laptop laptop, int age) {
+//        System.out.println("multi para constructor called");
+//        this.laptop = laptop;
+//        this.age = age;
+//    }
+
+    public Alien(int age) {
+//        System.out.println("age constructor called");
+        this.age = age;
+    }
+
+    public Computer getCom() {
+        return com;
+    }
+
+    @Autowired
+    @Qualifier("desktop2")
+    public void setCom(Computer com) {
+        this.com = com;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    @Value("25")
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public Alien(){
+        System.out.println("Alien obj created");
+    }
+    public void code(){
+        System.out.println("coding");
+        com.compile();
+    };
+
+}
+
+package org.example;
+
+import org.example.config.AppConfig;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+/**
+ * Hello world!
+ */
+public class App {
+    public static void main(String[] args) {
+        ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+        Alien al = context.getBean(Alien.class);
+        al.code();
+        System.out.println(al.getAge());
+    }
+}
+
+```
+
