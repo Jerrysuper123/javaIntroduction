@@ -694,3 +694,66 @@ you can also autowire by type - look for type, not name
     </property>
 </bean>
 ```
+
+# java-based configuration
+most people prefer java-based config.
+
+## create AppConfig class to manage the beans
+Within the same package, create /config/appConfig.class
+```
+new AnnotationConfigApplicationContext(AppConfig.class)
+```
+
+put @Configuration into AppConfig class, then creating the Desktop object under the class. Then add annotation @Bean
+
+## give name to the bean
+the method name is the bean name, u can give multiple name after @bean
+
+## scope annotation - how to use prototype for desktop
+@Scope("prototype)
+- this will create multiple objects
+- only when when u create it, not when loading the config file
+
+## autowire
+Add @bean for Alien class
+
+@Autowire Computer which is a super Interface
+
+## primary bean
+if u autowire Computer com, and have 2 types of Computer bean. Spring cannot find which is the right Computer bean
+
+u can use the @Qualifier("Desktop) to specify this to be used
+
+or we can use @primary to make the bean a primary bean
+
+## Component stereotype annotation
+Alien and Desktop class does not know if they are managed by spring bean
+
+Add @Component on top of all the classes, the adv is u do not need to write xml or java-based config
+
+Add @ComponentScan("com.package); 
+
+## autowire computer interface
+Yes, auto look for any beans that has the Computer interface
+then wire Desktop into Alien obj
+
+@Autowire
+@Qualifier("laptop") //bean name is the class name, just small cap
+
+you can also specify the name of the name by @Component("com2"), so Desktop obj will have a name of com2
+
+3 levels of injection
+1. field injection
+- @Autowired private Computer com;
+2. constructor injection
+3. setter injection
+best to use above setter
+
+## qualifier vs. primary
+qualifier precede primary, qualifier will be given precedence in instruction.
+
+## scope and value annotation
+scope - singleton and prototype
+
+how to inject a value -> @value("21); when u use annotation, you are injecting from outside the code
+
