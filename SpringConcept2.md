@@ -1151,6 +1151,249 @@ U can create a private cloud - somebody manage this, but cost will be higher.
 hybrid cloud - some data is public and some is private cloud
 
 
+# section 24 micro services
+monolithic vs. micro services
+
+scalability is hard for monolithic; u only need to scale on search instead of the entire application
+
+individual service, if one service is down, the other services will stil be up.
+
+use API gateway for each service to communicate with each other
+
+## cloud native
+most companies moving from onpremise to cloud.
+
+cloud-ready - u have an app on premise, u have to make some changes to the existing app to make it cloud-ready
+
+cloud-native - build a new app on cloud directly and natively using all its features
+
+follow 12 factor app to be cloud native
+1. code base - has version control
+2. dependencies - declare explicitly, keep it separate
+3. config - store config (port) in the environment. env. to save all in one place
+- so that it can save in one place
+
+do not hard code the configuration - configure out side the code
+4. backing service
+5. build -> release -> and run
+strictly separate build and run stages
+
+always separate build and release. build has a release version, so that u can revert to previous versions
+6. processes - do not store the data in the process, data must come from the attached db
+7. port binding - every service has a different port
+8. concurrency - scale out
+9. disposability - easy to dispose a service, should be easy, but should not lose data
+10. dev prod parity
+keep dev, staging and production env as similar as possible
+
+use docker image to resolve this issue
+11. logs - treat logs as event streams
+12. admin process
+should admin ur app from outside
+
+need to follow the 12 steps to be cloud native
+
+## quiz app
+move from monolithic app to micro services
+
+CRUD on questions
+
+add dependencies, postgres, jpa, spring web, lombok
+
+connect to db with many questions db
+
+1. Controller
+2. service layer
+3. DAO - data access object
+
+In Java, DAO stands for Data Access Object. It is a design pattern used to separate the data persistence logic from the business logic in an application. By using a DAO, you create an abstraction layer that handles operations with a database or other data storage systems.
+
+Purpose of DAO Pattern:
+Separation of Concerns:
+It separates the database access logic from the main application logic.
+Code Reusability:
+Data access code can be reused across different parts of the application.
+Maintainability:
+Changes to the database structure or logic can be handled in the DAO layer without affecting business logic.
+Testability:
+DAOs can be easily mocked or tested independently of the rest of the application.
+How DAO Works:
+The DAO acts as an intermediary between the application and the data source (e.g., a database).
+It provides methods to perform CRUD operations (Create, Read, Update, Delete) on the data.
+Typically, it uses JDBC, Hibernate, or other persistence frameworks for database interactions.
+
+
+## quiz app - set up part 3
+when u have to custom sql in jpa - use use
+1. HQL
+2. JPQL - jpa query language
+
+however, if u rename the method name properly, by findByCategory in interface QuestionDao, jpa auto knows u r finding Category col in the table.
+
+## quiz app - part 4
+add responseEntiy object instead of List<Question>
+
+## quiz app - part 5
+create quiz - fetch java question by difficulty
+
+```
+/quiz/create?category=Java&noOfQuestions=5&title=Jquiz
+```
+
+## quiz app - part 8
+monolithic app
+https://github.com/navinreddy20/quiz-app-spring
+
+
+## build micro services from monolithic
+question, quiz, and user, and certificate -> they all run independently
+
+question will has it own db
+service will has its own db
+but we have to connect them together using http
+
+API gateway - user initiated from a single API, then redirected to different services through API gateway
+
+Load balance - when one service is calling another, we will use load balancer to redirect
+
+Service registry - who is calling who, we need to a way to manage this
+
+failed fast - if one of the services return null, it should fail fast to notify another service
+
+## build a question microservices
+create artifact: question-service
+- spring web
+- postgres sql driver
+- lombok
+- spring data spa
+- OpenFeign (spring cloud routing)
+- Eureka discovery client (spring cloud discovery)
+
+Comment out openFeign and Eureka atm
+
+create separate database for question service
+
+### create question service 2
+create a generate function for service to call to get some questions
+
+Dao to return list<Integer> and return only question id only
+
+Create getQuestions - return a list of questions based on wrapper Response, based on a list of question id
+
+create getScore - calculate the final score value and return to quiz-service
+
+## running question service
+we might have multiple instances of question service, not just 1 server
+
+testing in postman
+
+how to run multiple instances of the same service
+- Go to Edit configuration
+- copy configuration
+- instance 9091
+- add vm options
+- "-Dserver.port=8081"
+- you will see 2 options of instances running on the same service
+
+## create quiz service part - 4
+create API points
+- createQuiz
+- get
+- getscore
+
+Create an artifact quiz-service
+
+create a new db "quizdb" in page admin
+- table auto-generated by the model jpa
+- we need to keep all models
+
+createQuiz can accept 1 big object instead of 3 separate request params - QuizDto (data transfer object)
+- create QuizDto class
+
+for quiz-service to call question-service, we have to use rest template to init api call
+
+we cannot use localhost and port number, because we do not why which instance, localhost can have multiple instances. so instead of rest template, we can use other methods
+- we need openFeign to configure the call
+- we also need service discovery - quiz service has to discovery question service
+- we can use Eureka client
+1. each service will have eureka client
+2. when they search for each other, they will go to Service registry/Eureka server to know which one to call
+3. the process goes about 1) register and 2) discovery
+
+## create a service register
+service x (with Eureka client) -> reach to Service register/Eureka server -> service y (with Eureka client)
+
+in the process of register and discovery, bi-directional
+
+create a new artifact -> service-registry, add dependencies
+- spring web
+- Eureka server
+
+We need to change
+- Add @EnableEurekaServer in app
+- change app properties
+
+when u load eureka server, this will create a dashbooard, showing which instances are connected to the server.
+
+let us connect question-service to service-registry
+- go to POM file to uncomment eureka client
+- go app properties to add a name to be discovered by Eureka server
+
+
+Next, for quiz-service to discover question-service, we will use Feign to do this.
+
+-- very interesting
+
+## using feign
+in quiz service, when create quiz, when we want quiz-service to interact with question-service.
+
+instead of rest template (port and url), we use feign to make it short easier.
+- feign will search the service for you
+
+create a feign package inside quiz-service.
+- create a file inside feign package, enable quiz to connect to question service
+- enable eureka client and feign in quiz-service
+- in quizinterface, connecct to question-service
+
+update Quiz.java
+- change many to many to elementCollection
+- change to questionIds
+
+At application level
+- enableFeignClients
+
+change quiz-service to port 8090 number
+
+## microservice is calling microservice
+
+## completing the 2 microservices
+Complete quiz-service other 2 APIs
+
+## load balancing
+
+if u have multiple instances of the same app.
+if one instance is busy, we can call the other instances
+
+when quiz service is calling question-service
+- we can push the api call to the direct instance with low load
+- spring has load balancing
+- the moment u r using feignclient, it will use the service that has lower load
+- get Environment bean, Environment.getProperty("local.server.port"); this tells us which port it is running
+
+## API gateway
+Users has not interest in how your microservice is working; user only need 1 API service to interact with all services.
+- user do not need to log in in each services to use the product
+- in spring cloud, we get API gateway automatically
+
+create an api-gateway artifact, adding dependencies
+- gateway
+- Eureka discovery client
+
+a client send a request to API gateway, then api gateway find the right services and API to call
+
+source: https://github.com/navinreddy20/MicroserviceTutorials
+
+
 
 # section 24 micro services
 
