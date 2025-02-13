@@ -1,8 +1,8 @@
 # Maven - project manager for external lib
 make sure all versions are in sync
-spring will work with hypernate??
+spring will work with hypernate?? hypernate is just an ORM - wrapper for db.
 
-other examples, Gradle and ivy
+Similar to Maven, there are other project manager like Gradle and ivy
 
 # maven has lifecyles to manage build, test etc and plugins as well
 
@@ -10,6 +10,11 @@ other examples, Gradle and ivy
 they are templates for us to start
 
 Dependencies are in Jar files
+- Jar is java archive file
+- Why do we pack everything in jar file?
+1. standard way to pack all classes, resources and metadata into a single file. Single file is easy to distribution
+2. jar is essentially like zip file, compressing the file size
+3. Tools like Maven and Gradle manage dependencies in Jar format
 
 Go to mvnrepository.com to try mysql connector
 
