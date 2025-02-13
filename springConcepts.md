@@ -39,13 +39,26 @@ We need the GAV to create a jar file
 
 # transitive dependencies
 - i do not want the dependency, but my lib wants it
+```
+Your Project
+   ├── Depends on: Library A
+          ├── Depends on: Library B (Transitive Dependency)
+```
+
+
 
 # POM (project object model _ XML rep of a MAVEN project) -> show Effective POM
-- there are more thing things in Effective POM. 
+- there are more thing in Effective POM. 
 - There are plugins to be used, although it does not show up in POM
 - developers just modify POM, framework will create necessary effective POM
 
+- POM or (pom.xml) is the one used by developers
+- while effective POM is the actual config Maven used after applying all defaults and inheritance
+
 # Maven Archetype - existing templates
+meaning of archetype in english
+- an original model or prototype in English
+
 there are too many templates to be used
 j2ee, webapp
 
@@ -53,11 +66,13 @@ Maven central has multiple archetype
 
 Usually when we download spring boot, it is already configured. 
 
-# How Maven works
+# How Maven works - .m2 is the local dependency cache
 .m2 folder - you will see the repository
 - everytime Maven downloads a dependencies, it will create a local .m2 folder
 - if dependency is not there, go to maven central to download
 - some company will have their own local repository, if it is not there, you cannot use it for security reasons.
+
+
   
 # pg admin 4 - admin panel for db
 create db demo
@@ -83,6 +98,10 @@ better use prepared statement
 
 prepareStatement(sql) -> prepare the sql statement for var replacement later, it is cache in memory
 
+Prepared statement will convert user input (later part of below sql statement) into a string. and it will not be executed as sql.
+```
+SELECT * FROM users WHERE username = 'john''; DROP TABLE users; --'
+```
 # Spring framework 
 ORM - hibernate
 Spring - light weight
@@ -93,6 +112,20 @@ spring is an econsystem.
 useful for enterprize application
 
 servlet - what is it? what is spring mvc? tomcat - servlet container?? what is it
+
+- servlet handles request and response, just like Express.js. They run on a server
+- Tomcat is a web server and servlet container (need a war. file and run inside Tomcat). It is similar to node.js runtime and Express.js combined
+
+# What is a war file?
+A WAR (Web Application Archive) file is a packaged Java web application that contains everything needed to run the app, including:
+
+    Java classes (Servlets, controllers)
+    JSP files (if used)
+    HTML, CSS, JavaScript (frontend)
+    Libraries (.jar files)
+    web.xml or WEB-INF/ configuration files
+
+Think of a WAR file as a ZIP archive that Tomcat understands and can deploy.
 
 # IOC - inversion od control (a principle) and DI - dependency injection (design pattern)
 
