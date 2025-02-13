@@ -127,7 +127,7 @@ A WAR (Web Application Archive) file is a packaged Java web application that con
 
 Think of a WAR file as a ZIP archive that Tomcat understands and can deploy.
 
-# IOC - inversion od control (a principle) and DI - dependency injection (design pattern)
+# IOC - inversion of control (a design principle - object creation is shifted from app code to framework or container ) and DI - dependency injection (design pattern)
 
 IOC - inverting the control
 - create obj, maintain and destroy the obj, and control the flow
@@ -138,8 +138,35 @@ How does IOC principle work?
 - we make use of design pattern dependency injection
 - we inject the obj directly without creating a new obj ourself
 
+It  is better to use dependency injection to avoid tightly coupled system.
+- Client directly depends on Service (new Service() inside Client).
+- If we change Service (e.g., rename serve() method), we must modify Client.
+- If we want to replace Service with NewService, we must change every place new Service() is used.
+```
+class Service {
+    void serve() {
+        System.out.println("Service is running...");
+    }
+}
+
+class Client {
+    private Service service;  // Direct dependency (tight coupling)
+
+    Client() {
+        this.service = new Service();  // Object is created inside Client
+    }
+
+    void doWork() {
+        service.serve();
+    }
+}
+```
+
+
+
+
 # spring vs spring boot
-in the past, to use spring, we have to config xlm file, create project and create beans, very troublesome. 
+in the past, to use spring, we have to config xml file, create project and create beans, very troublesome. 
 
 To ease this, we use spring boot - opinionated framework.
 
