@@ -94,8 +94,10 @@ JDBC templating can u help u to
 4. get output
 
 DBMS each has its unique features, so we need different drivers for each. H2 in memory db, we will use this
-SpringJDBCEx
+SpringJDBC
+
 add dependencies JDBC API
+
 h2 database
 
 ## how to map class to a table
