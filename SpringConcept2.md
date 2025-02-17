@@ -114,6 +114,8 @@ findall() is to fetch all data
 ## create schema and data file
 In resources folder, u can crate schema.sql and data.sql.
 
+Where you can use JDBC to exe the sql statements in these files.
+
 ## what is row mapper? -> to map each row into sth
 fetch data from your result set, which has all data 1 by 1
 rowmapper will get data from result set.
