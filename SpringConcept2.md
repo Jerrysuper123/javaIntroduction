@@ -1264,6 +1264,11 @@ Service registry - who is calling who, we need to a way to manage this
 
 failed fast - if one of the services return null, it should fail fast to notify another service
 
+A Service Registry is a centralized directory that keeps track of all the services running in a microservices architecture. It allows services to dynamically register themselves and discover other services.
+Why Do We Need a Service Registry?
+
+In a microservices system, services often run on different machines, ports, and environments (e.g., Docker containers, Kubernetes pods). Since they are constantly scaling up/down or changing IP addresses, we need a way to register and locate them dynamically instead of hardcoding their locations.
+
 ## build a question microservices
 create artifact: question-service
 - spring web
