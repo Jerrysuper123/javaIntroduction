@@ -1,5 +1,53 @@
 # javaIntroduction
 
+In the Java world, **JDK** and **JCDK** are different tools used for different purposes:
+
+---
+
+### 🟢 **JDK (Java Development Kit)**
+
+* **What it is**: A standard software development kit for building general-purpose Java applications.
+* **Purpose**: Used by most Java developers to compile, run, and debug Java applications.
+* **Includes**:
+
+  * `javac` (Java compiler)
+  * `java` (Java runtime)
+  * Java libraries (like `java.util`, `java.io`, etc.)
+  * Tools like `javadoc`, `jar`, etc.
+* **Target**: General-purpose computing (desktops, servers, mobile apps, etc.)
+
+---
+
+### 🔵 **JCDK (Java Card Development Kit)**
+
+* **What it is**: A specialized development kit for building **Java Card** applications.
+* **Purpose**: Used for writing Java applications that run on **smart cards** or **secure elements** with limited resources.
+* **Includes**:
+
+  * Java Card-specific APIs (`javacard.framework`)
+  * Tools to convert `.class` files into `.cap` files (Compact Application Packages) used on Java Cards
+  * Emulators for testing Java Card apps
+* **Target**: Embedded secure systems like:
+
+  * SIM cards
+  * Credit/debit cards
+  * Electronic passports
+  * Hardware security modules (HSMs)
+
+---
+
+### Summary:
+
+| Feature  | JDK               | JCDK                             |
+| -------- | ----------------- | -------------------------------- |
+| Use case | General Java apps | Java Card (smart card) apps      |
+| Output   | `.class`, `.jar`  | `.cap` files                     |
+| APIs     | Standard Java API | Subset + Java Card-specific APIs |
+| Runtime  | JVM               | Java Card Virtual Machine (JCVM) |
+
+
+
+
 ## dependency injection
 It is for writing better code and testing
 - We do not instantiate a class within the parent class
